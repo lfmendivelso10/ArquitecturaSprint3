@@ -1,18 +1,23 @@
 class RecordController < ApplicationController
   include RecordHelper
+  protect_from_forgery :except => :post
 
   def post
     #Receiver
     record = Record.new(
-        collar_id: params[:collar_id],
-        frec_cardiaca: params[:frec_cardiaca],
-        p_sistolica: params[:p_sistolica],
-        p_diastolica: params[:p_diastolica],
-        frec_respiratoria: params[:frec_respiratoria],
-        longitud: params[:longitud],
-        latitud: params[:latitud]
+        collarId: params[:collarId],
+        latitude: params[:latitude],
+        longitude: params[:longitude],
+        breathingFrequency: params[:breathingFrequency],
+        hearthFrequency: params[:hearthFrequency],
+        systolicPressure: params[:systolicPressure],
+        diastolicPressure: params[:diastolicPressure],
+        temperature: params[:temperature]
     )
 
+    # Response
+    result = process_record(record)
+    render json: result
   end
 
   def get
@@ -20,6 +25,6 @@ class RecordController < ApplicationController
   end
 
   def loader
-    render :text => "loaderio-9b75a2d089aa19f44f518eea85f61bcd"
+    render :text => ""
   end
 end

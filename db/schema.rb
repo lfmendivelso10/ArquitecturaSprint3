@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160414053124) do
+ActiveRecord::Schema.define(version: 20160414142827) do
 
   create_table "collars", force: :cascade do |t|
     t.integer  "pet_id",          limit: 4
@@ -34,15 +34,15 @@ ActiveRecord::Schema.define(version: 20160414053124) do
   create_table "pet_conditions", force: :cascade do |t|
     t.integer  "pet_id",             limit: 4
     t.string   "ownerEmail",         limit: 255
-    t.float    "latitude",           limit: 24
-    t.float    "longitude",          limit: 24
+    t.decimal  "latitude",                       precision: 10, scale: 6
+    t.decimal  "longitude",                      precision: 10, scale: 6
     t.integer  "breathingFrequency", limit: 4
     t.integer  "heartFrequency",     limit: 4
     t.integer  "systolicPressure",   limit: 4
-    t.integer  "distolicPressure",   limit: 4
+    t.integer  "diastolicPressure",  limit: 4
     t.float    "temperature",        limit: 24
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
   end
 
   add_index "pet_conditions", ["ownerEmail"], name: "index_pet_conditions_on_ownerEmail", using: :btree
@@ -63,30 +63,36 @@ ActiveRecord::Schema.define(version: 20160414053124) do
   add_index "pets", ["user_id"], name: "index_pets_on_user_id", using: :btree
 
   create_table "records", force: :cascade do |t|
-    t.integer  "pet_id",             limit: 4
-    t.float    "latitude",           limit: 24
-    t.float    "longitude",          limit: 24
+    t.string   "collarId",           limit: 255
+    t.decimal  "latitude",                       precision: 10, scale: 6
+    t.decimal  "longitude",                      precision: 10, scale: 6
     t.integer  "breathingFrequency", limit: 4
-    t.integer  "heartFrequency",     limit: 4
+    t.integer  "hearthFrequency",    limit: 4
     t.integer  "systolicPressure",   limit: 4
-    t.integer  "distolicPressure",   limit: 4
-    t.float    "temperature",        limit: 24
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.integer  "diastolicPressure",  limit: 4
+    t.integer  "temperature",        limit: 4
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
   end
-
-  add_index "records", ["pet_id"], name: "index_records_on_pet_id", using: :btree
 
   create_table "safe_zones", force: :cascade do |t|
     t.integer  "pet_id",     limit: 4
-    t.float    "latitude",   limit: 24
-    t.float    "longitude",  limit: 24
+    t.decimal  "latitude",              precision: 10, scale: 6
+    t.decimal  "longitude",             precision: 10, scale: 6
     t.float    "radius",     limit: 24
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
   end
 
   add_index "safe_zones", ["pet_id"], name: "index_safe_zones_on_pet_id", using: :btree
+
+  create_table "transaction_logs", force: :cascade do |t|
+    t.string   "component",  limit: 255
+    t.text     "data",       limit: 65535
+    t.string   "status",     limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",      limit: 255
@@ -106,7 +112,6 @@ ActiveRecord::Schema.define(version: 20160414053124) do
   add_foreign_key "collars", "pets"
   add_foreign_key "pet_conditions", "pets"
   add_foreign_key "pets", "users"
-  add_foreign_key "records", "pets"
   add_foreign_key "safe_zones", "pets"
   add_foreign_key "users", "nations"
 end

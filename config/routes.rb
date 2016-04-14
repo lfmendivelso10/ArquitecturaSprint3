@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get 'record/post'
+  get 'location/location'
+
+  post 'record' => 'record#post'
 
   get 'record/get'
 

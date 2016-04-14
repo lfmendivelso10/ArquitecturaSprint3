@@ -83,6 +83,7 @@ GEM
     newrelic_rpm (3.15.1.316)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    puma (3.4.0)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
@@ -162,6 +163,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   mysql2 (>= 0.3.13, < 0.5)
   newrelic_rpm
+  puma
   rails (= 4.2.5.2)
   rufus-scheduler
   sdoc (~> 0.4.0)

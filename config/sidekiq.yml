@@ -1,0 +1,10 @@
+---
+:concurrency: 10
+:pidfile: tmp/pids/sidekiq.pid
+staging:
+  :concurrency: 20
+production:
+  :concurrency: 50
+:queues:
+  - default
+  - [location_analysis, 2]

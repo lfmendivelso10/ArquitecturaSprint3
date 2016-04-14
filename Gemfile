@@ -11,6 +11,7 @@ gem 'thin'
 # Job Scheduler
 gem 'rufus-scheduler'
 gem 'newrelic_rpm'
+gem 'puma'
 ##### End Dependencies #####
 
 ##### Functional Core

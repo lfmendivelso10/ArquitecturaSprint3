@@ -3,12 +3,12 @@ class CreatePetConditions < ActiveRecord::Migration
     create_table :pet_conditions do |t|
       t.references :pet, index: true, foreign_key: true
       t.string :ownerEmail
-      t.float :latitude
-      t.float :longitude
+      t.decimal :latitude ,precision: 10, scale: 6
+      t.decimal :longitude ,precision: 10, scale: 6
       t.integer :breathingFrequency
       t.integer :heartFrequency
       t.integer :systolicPressure
-      t.integer :distolicPressure
+      t.integer :diastolicPressure
       t.float :temperature
 
       t.timestamps null: false
