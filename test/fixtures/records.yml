@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pet_id: 
+  latitude: 1.5
+  longitude: 1.5
+  breathingFrequency: 1
+  heartFrequency: 1
+  systolicPressure: 1
+  distolicPressure: 1
+  temperature: 1.5
+
+two:
+  pet_id: 
+  latitude: 1.5
+  longitude: 1.5
+  breathingFrequency: 1
+  heartFrequency: 1
+  systolicPressure: 1
+  distolicPressure: 1
+  temperature: 1.5

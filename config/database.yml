@@ -1,0 +1,36 @@
+#
+# Configuración de Base de datos
+#
+
+### Desarrollo ###
+development:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: arquitectura_development
+  pool: 5
+  username: admin
+  password: horus2004
+  host: 127.0.0.1
+
+### Pruebas ###
+test:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: arquitectura_test
+  pool: 25
+  username: admin
+  password: horus2004
+  host: 127.0.0.1
+
+### Production ###
+production:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: arquitectura_production
+  pool: 50
+  username: admin
+  password: horus2004
+  host: 127.0.0.1
