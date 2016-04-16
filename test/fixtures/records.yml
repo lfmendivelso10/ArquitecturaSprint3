@@ -2,20 +2,22 @@
 
 one:
   collarId: MyString
-  latitude: 1.5
-  longitude: 1.5
+  latitude: 9.99
+  longitude: 9.99
   breathingFrequency: 1
-  hearthFrequency: 1
+  heartFrecuency: 1
   systolicPressure: 1
   diastolicPressure: 1
   temperature: 1
+  status: MyString
 
 two:
   collarId: MyString
-  latitude: 1.5
-  longitude: 1.5
+  latitude: 9.99
+  longitude: 9.99
   breathingFrequency: 1
-  hearthFrequency: 1
+  heartFrecuency: 1
   systolicPressure: 1
   diastolicPressure: 1
   temperature: 1
+  status: MyString

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160414142827) do
+ActiveRecord::Schema.define(version: 20160414214328) do
 
   create_table "collars", force: :cascade do |t|
     t.integer  "pet_id",          limit: 4
@@ -67,13 +67,16 @@ ActiveRecord::Schema.define(version: 20160414142827) do
     t.decimal  "latitude",                       precision: 10, scale: 6
     t.decimal  "longitude",                      precision: 10, scale: 6
     t.integer  "breathingFrequency", limit: 4
-    t.integer  "hearthFrequency",    limit: 4
+    t.integer  "heartFrequency",     limit: 4
     t.integer  "systolicPressure",   limit: 4
     t.integer  "diastolicPressure",  limit: 4
     t.integer  "temperature",        limit: 4
+    t.string   "status",             limit: 255
     t.datetime "created_at",                                              null: false
     t.datetime "updated_at",                                              null: false
   end
+
+  add_index "records", ["collarId"], name: "index_records_on_collarId", using: :btree
 
   create_table "safe_zones", force: :cascade do |t|
     t.integer  "pet_id",     limit: 4

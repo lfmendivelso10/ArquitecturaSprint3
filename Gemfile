@@ -6,12 +6,10 @@ gem 'aws-sdk', '~> 2'
 # Sidekiq and Redis
 gem 'sidekiq'
 gem 'sinatra', :require => nil
-# Server Config
-gem 'thin'
 # Job Scheduler
 gem 'rufus-scheduler'
 gem 'newrelic_rpm'
-gem 'puma'
+gem 'json'
 ##### End Dependencies #####
 
 ##### Functional Core

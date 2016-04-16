@@ -8,7 +8,7 @@ development:
   encoding: utf8
   reconnect: false
   database: arquitectura_development
-  pool: 50
+  pool: 25
   username: admin
   password:
   host: 127.0.0.1
@@ -20,7 +20,7 @@ test:
   encoding: utf8
   reconnect: false
   database: arquitectura_test
-  pool: 500
+  pool: 50
   username: admin
   password:
   host: 127.0.0.1
@@ -32,7 +32,7 @@ production:
   encoding: utf8
   reconnect: false
   database: arquitectura_production
-  pool: 50
+  pool: 75
   username: admin
   password:
   host: 127.0.0.1

@@ -56,10 +56,8 @@ GEM
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.1)
     connection_pool (2.2.0)
-    daemons (1.2.3)
     debug_inspector (0.0.2)
     erubis (2.7.0)
-    eventmachine (1.0.9.1)
     execjs (2.6.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -83,7 +81,6 @@ GEM
     newrelic_rpm (3.15.1.316)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
-    puma (3.4.0)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
@@ -137,10 +134,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    thin (1.6.4)
-      daemons (~> 1.0, >= 1.0.9)
-      eventmachine (~> 1.0, >= 1.0.4)
-      rack (~> 1.0)
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.2)
@@ -161,16 +154,15 @@ DEPENDENCIES
   aws-sdk (~> 2)
   byebug
   jbuilder (~> 2.0)
+  json
   mysql2 (>= 0.3.13, < 0.5)
   newrelic_rpm
-  puma
   rails (= 4.2.5.2)
   rufus-scheduler
   sdoc (~> 0.4.0)
   sidekiq
   sinatra
   spring
-  thin
   turbolinks
   web-console (~> 2.0)
 

@@ -44,4 +44,9 @@ module RecordHelper
       return 'OK'
     end
   end
+
+  def init_lmax(record_flat)
+
+  end
+
 end

@@ -1,10 +1,12 @@
 ---
-:concurrency: 10
+:concurrency: 25
 :pidfile: tmp/pids/sidekiq.pid
 staging:
-  :concurrency: 20
-production:
   :concurrency: 50
+production:
+  :concurrency: 75
 :queues:
-  - default
-  - [location_analysis, 2]
+  - 'default'
+  - ['journaler',5]
+  - ['businesslogic',5]
+  - ['notifiers',3]
