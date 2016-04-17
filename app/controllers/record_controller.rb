@@ -3,6 +3,11 @@ class RecordController < ApplicationController
   protect_from_forgery :except => :post
 
   def post
+    # Statistics record
+    journalerTime = StatictisJournaler.new
+    processTime = StatictisProcess.new
+    d_begin = DateTime.now.strftime('%Q')
+
     #Unmasharller
     record = Record.new(
         collarId: params[:collarId],
@@ -16,21 +21,19 @@ class RecordController < ApplicationController
         status: 'receiver'
     )
 
-    # redis = Redis.new
-    # receiver = redis.get('receiver_f').to_s
-    # if receiver != nil
-    #   receiver = "0"
-    # end
-    # receiver_f = receiver.to_i+1;
-    # record_flat = 'r'+receiver_f.to_s
-    # redis.set(record_flat,record.to_json)
-    # puts record_flat
-    # redis['receiver_f'] = receiver_f.to_s
-    # redis.quit
+    d_end = DateTime.now.strftime('%Q')
+    t_unmarshaller = d_end.to_f - d_begin.to_f
+    journalerTime.d_unmarshaller_begin = d_begin.to_s
+    journalerTime.d_unmarshaller_end= d_end.to_s
+    journalerTime.t_unmarshaller= t_unmarshaller.to_i
+    journalerTime.collarId = record.collarId
+    processTime.d_unmarshaller_begin = d_begin.to_s
+    processTime.d_unmarshaller_end = d_end.to_s
+    processTime.t_unmarshaller = t_unmarshaller.to_i
+    processTime.collarId = record.collarId
 
-
-    JournalerWorker.perform_async(record.to_json.to_s)
-    LocationAnalysisWorker.perform_async(record.to_json.to_s)
+    JournalerWorker.perform_async(record.to_json.to_s,journalerTime.to_json)
+    LocationAnalysisWorker.perform_async(record.to_json.to_s,processTime.to_json)
 
     render json: record
   end

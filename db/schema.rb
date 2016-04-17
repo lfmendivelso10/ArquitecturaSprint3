@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160414214328) do
+ActiveRecord::Schema.define(version: 20160417162228) do
 
   create_table "collars", force: :cascade do |t|
     t.integer  "pet_id",          limit: 4
@@ -89,12 +89,39 @@ ActiveRecord::Schema.define(version: 20160414214328) do
 
   add_index "safe_zones", ["pet_id"], name: "index_safe_zones_on_pet_id", using: :btree
 
-  create_table "transaction_logs", force: :cascade do |t|
-    t.string   "component",  limit: 255
-    t.text     "data",       limit: 65535
-    t.string   "status",     limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+  create_table "statictis_journalers", force: :cascade do |t|
+    t.string   "collarId",             limit: 255
+    t.string   "d_unmarshaller_begin", limit: 255
+    t.string   "d_unmarshaller_end",   limit: 255
+    t.string   "d_journaler_begin",    limit: 255
+    t.string   "d_journaler_end",      limit: 255
+    t.integer  "t_unmarshaller",       limit: 4
+    t.integer  "t_inredis_queue",      limit: 4
+    t.integer  "t_journaler",          limit: 4
+    t.integer  "t_process",            limit: 4
+    t.integer  "t_perception",         limit: 4
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
+  create_table "statictis_processes", force: :cascade do |t|
+    t.string   "collarId",              limit: 255
+    t.string   "d_unmarshaller_begin",  limit: 255
+    t.string   "d_unmarshaller_end",    limit: 255
+    t.string   "d_businesslogic_begin", limit: 255
+    t.string   "d_businesslogic_end",   limit: 255
+    t.string   "d_output_begin",        limit: 255
+    t.string   "d_output_end",          limit: 255
+    t.integer  "notify",                limit: 4
+    t.integer  "t_unmarshaller",        limit: 4
+    t.integer  "t_inredis_queue",       limit: 4
+    t.integer  "t_businesslogic",       limit: 4
+    t.integer  "t_insqs_queue",         limit: 4
+    t.integer  "t_output",              limit: 4
+    t.integer  "t_process",             limit: 4
+    t.integer  "t_perception",          limit: 4
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   create_table "users", force: :cascade do |t|

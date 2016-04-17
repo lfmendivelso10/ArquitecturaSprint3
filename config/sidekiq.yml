@@ -4,9 +4,9 @@
 staging:
   :concurrency: 50
 production:
-  :concurrency: 75
+  :concurrency: 80
 :queues:
   - 'default'
   - ['journaler',5]
-  - ['businesslogic',5]
+  - ['businesslogic',4]
   - ['notifiers',3]

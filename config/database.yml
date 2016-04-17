@@ -32,7 +32,7 @@ production:
   encoding: utf8
   reconnect: false
   database: arquitectura_production
-  pool: 75
+  pool: 80
   username: admin
   password:
   host: 127.0.0.1
