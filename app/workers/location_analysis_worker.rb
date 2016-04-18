@@ -53,7 +53,10 @@ class LocationAnalysisWorker
       processTime.t_perception = processTime.t_process + processTime.t_inredis_queue
       processTime.save!
     else
-      sqs = Aws::SQS::Client.new
+      sqs = sqs = Aws::SQS::Client.new(
+          region: ENV['AWS_ADMIN_REGION'],
+          credentials: Aws::Credentials.new(ENV['AWS_ADMIN_ID'], ENV['AWS_ADMIN_SECRET']  ),
+      )
       msg = sqs.send_message(
           queue_url: ENV['AWS_SQS_URL'].to_s,
           message_body: processTime.to_json.to_s
