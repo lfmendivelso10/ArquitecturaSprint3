@@ -2,6 +2,7 @@ class LocationAnalysisWorker
   include Sidekiq::Worker
   sidekiq_options queue: 'businesslogic', :retry => 10, :backtrace => true
   require 'json'
+  require 'aws-sdk'
 
   sidekiq_retries_exhausted do |msg|
     recordJson = JSON.parse(msg['args'][0].to_s)
@@ -53,9 +54,11 @@ class LocationAnalysisWorker
       processTime.t_perception = processTime.t_process + processTime.t_inredis_queue
       processTime.save!
     else
-      sqs = sqs = Aws::SQS::Client.new(
-          region: ENV['AWS_ADMIN_REGION'],
-          credentials: Aws::Credentials.new(ENV['AWS_ADMIN_ID'], ENV['AWS_ADMIN_SECRET']  ),
+
+      # noinspection RubyArgCount
+      sqs = Aws::SQS::Client.new(
+          region: ENV['AWS_ADMIN_REGION'].to_s,
+          credentials: Aws::Credentials.new(ENV['AWS_ADMIN_ID'].to_s, ENV['AWS_ADMIN_SECRET'].to_s),
       )
       msg = sqs.send_message(
           queue_url: ENV['AWS_SQS_URL'].to_s,
