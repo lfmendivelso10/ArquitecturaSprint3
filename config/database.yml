@@ -26,6 +26,7 @@ test:
   password: <%= ENV['DBPASSWORD'] %>
   host: <%= ENV['DBHOST'] %>
   socket: /tmp/mysql.sock
+  wait_timeout: 300
   port: 3306
 
 ### Production ###
@@ -38,4 +39,5 @@ production:
   username: <%= ENV['DBUSERNAME'] %>
   password: <%= ENV['DBPASSWORD'] %>
   host: <%= ENV['DBHOST'] %>
+  wait_timeout: 300
   port: 3306

@@ -11,6 +11,7 @@ gem 'rufus-scheduler'
 gem 'newrelic_rpm'
 gem 'json'
 gem 'rest_client'
+gem 'unicorn'
 ##### End Dependencies #####
 
 ##### Functional Core
