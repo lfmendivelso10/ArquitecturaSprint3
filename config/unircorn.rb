@@ -24,7 +24,7 @@ stdout_path "#{app_dir}/log/unicorn.stdout.log"
 pid "#{shared_dir}/pids/unicorn.pid"
 
 before_fork do |server, worker|
-  @sidekiq_pid ||= spawn('bundle exec sidekiq -e production -c config/sidekiq.yml')
+  @sidekiq_pid ||= spawn('bundle exec sidekiq -c 2')
 end
 
 after_fork do |server, worker|
