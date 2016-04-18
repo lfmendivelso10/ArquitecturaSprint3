@@ -7,11 +7,11 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: arquitectura_development
+  database: <%= ENV['DBDATABASE'] %>
   pool: 25
-  username: admin
-  password:
-  host: 127.0.0.1
+  username: <%= ENV['DBUSERNAME'] %>
+  password: <%= ENV['DBPASSWORD'] %>
+  host: <%= ENV['DBHOST'] %>
   wait_timeout: 300
 
 ### Pruebas ###
@@ -19,11 +19,11 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: arquitectura_test
+  database: <%= ENV['DBDATABASE'] %>
   pool: 50
-  username: admin
-  password:
-  host: 127.0.0.1
+  username: <%= ENV['DBUSERNAME'] %>
+  password: <%= ENV['DBPASSWORD'] %>
+  host: <%= ENV['DBHOST'] %>
   socket: /tmp/mysql.sock
 
 ### Production ###
@@ -31,8 +31,8 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: arquitectura_production
+  database: <%= ENV['DBDATABASE'] %>
   pool: 80
-  username: admin
-  password:
-  host: 127.0.0.1
+  username: <%= ENV['DBUSERNAME'] %>
+  password: <%= ENV['DBPASSWORD'] %>
+  host: <%= ENV['DBHOST'] %>

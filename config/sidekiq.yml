@@ -1,6 +1,8 @@
 ---
+:verbose: false
 :concurrency: 25
 :pidfile: tmp/pids/sidekiq.pid
+:logfile: ./log/sidekiq.log
 staging:
   :concurrency: 50
 production:

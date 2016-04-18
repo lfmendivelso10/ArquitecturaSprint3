@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160417162228) do
+ActiveRecord::Schema.define(version: 20160418024206) do
 
   create_table "collars", force: :cascade do |t|
     t.integer  "pet_id",          limit: 4
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(version: 20160417162228) do
 
   add_index "collars", ["collarId"], name: "index_collars_on_collarId", using: :btree
   add_index "collars", ["pet_id"], name: "index_collars_on_pet_id", using: :btree
+
+  create_table "error_logs", force: :cascade do |t|
+    t.string   "worker",     limit: 255
+    t.text     "data",       limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "nations", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -138,6 +145,12 @@ ActiveRecord::Schema.define(version: 20160417162228) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["nation_id"], name: "index_users_on_nation_id", using: :btree
+
+  create_table "zone_availibities", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   add_foreign_key "collars", "pets"
   add_foreign_key "pet_conditions", "pets"

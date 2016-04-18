@@ -4,6 +4,15 @@ class JournalerWorker
   sidekiq_options queue: 'journaler', :retry => 10, :backtrace => true
   require 'json'
 
+  sidekiq_retries_exhausted do |msg|
+
+
+    recordJson = JSON.parse(msg['args'][0].to_s)
+    RestClient.post "http://localhost:3000/recover/record", recordJson.to_json, :content_type => :json, :accept => :json
+    errorData = ErrorLog.new(worker: 'ErrorWorker',data: msg['args'][0].to_s)
+    errorData.save!
+  end
+
   def perform(record_data,journaler_time)
     journalerTime = JSON.parse(journaler_time.to_s)
     jTime = StatictisJournaler.new.from_json(journalerTime.to_json)

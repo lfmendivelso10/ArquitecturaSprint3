@@ -1,8 +1,7 @@
-class RecordController < ApplicationController
-  include RecordHelper
-  protect_from_forgery :except => :post
+class RecoverController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
-  def post
+  def record
     # Statistics record
     journalerTime = StatictisJournaler.new
     processTime = StatictisProcess.new
@@ -38,13 +37,33 @@ class RecordController < ApplicationController
     render json: record
   end
 
-  def get
-    records = Record.all
-    render :json => records
-  end
+  def notify
+    # Statistics record
+    d_begin = DateTime.now.strftime('%Q')
 
-  def loader
-    render :text => ENV['LOADER_IO'].to_s
-  end
+    #Unmasharller
+    processTime = StatictisProcess.new(
+        collarId: params[:collarId],
+        d_unmarshaller_begin: d_begin.to_s
+    )
 
+    sqs = Aws::SQS::Client.new
+    d_end = DateTime.now.strftime('%Q')
+    t = d_end.to_f - d_begin.to_f
+    processTime.d_unmarshaller_end = d_end.to_s
+    processTime.t_unmarshaller = t.to_i
+    processTime.d_businesslogic_begin = d_begin.to_s
+    processTime.d_businesslogic_end= d_end.to_s
+    processTime.t_businesslogic = t.to_i
+    processTime.t_process = processTime.t_unmarshaller.to_i + t.to_i
+    processTime.t_inredis_queue = d_end.to_i - processTime.d_unmarshaller_end.to_i
+
+    msg = sqs.send_message(
+        queue_url: ENV['AWS_SQS_URL'].to_s,
+        message_body: processTime.to_json.to_s
+    )
+
+    render text: 'Mensaje enviado. ID: '+msg.message_id.to_s
+
+  end
 end

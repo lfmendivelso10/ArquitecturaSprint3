@@ -3,6 +3,13 @@ class LocationAnalysisWorker
   sidekiq_options queue: 'businesslogic', :retry => 10, :backtrace => true
   require 'json'
 
+  sidekiq_retries_exhausted do |msg|
+    recordJson = JSON.parse(msg['args'][0].to_s)
+    RestClient.post "http://localhost:3000/recover/record", recordJson.to_json, :content_type => :json, :accept => :json
+    errorData = ErrorLog.new(worker: 'ErrorWorker',data: msg['args'][0].to_s)
+    errorData.save!
+  end
+
   def perform(record_data,process_time)
     processT = JSON.parse(process_time.to_s)
     processTime = StatictisProcess.new.from_json(processT.to_json)

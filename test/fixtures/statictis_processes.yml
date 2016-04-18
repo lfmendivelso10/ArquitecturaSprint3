@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  collarId: MyString
+  d_unmarshaller_begin: 1
+  d_unmarshaller_end: 1
+  d_businesslogic_begin: 1
+  d_businesslogic_end: 1
+  d_output_begin: 1
+  d_output_end: 1
+  notify: 1
+  t_unmarshaller: 1
+  t_inredis_queue: 1
+  t_businesslogic: 1
+  t_insqs_queue: 1
+  t_output: 1
+  t_process: 1
+  t_perception: 1
+
+two:
+  collarId: MyString
+  d_unmarshaller_begin: 1
+  d_unmarshaller_end: 1
+  d_businesslogic_begin: 1
+  d_businesslogic_end: 1
+  d_output_begin: 1
+  d_output_end: 1
+  notify: 1
+  t_unmarshaller: 1
+  t_inredis_queue: 1
+  t_businesslogic: 1
+  t_insqs_queue: 1
+  t_output: 1
+  t_process: 1
+  t_perception: 1

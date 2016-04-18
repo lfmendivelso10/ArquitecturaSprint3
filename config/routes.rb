@@ -1,6 +1,10 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  post 'recover/record' => 'recover#record'
+
+  post 'recover/notify' => 'recover#notify'
+
   get 'location/location'
 
   post 'record' => 'record#post'

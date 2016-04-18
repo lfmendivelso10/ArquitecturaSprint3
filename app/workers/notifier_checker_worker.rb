@@ -3,7 +3,10 @@ class NotifierCheckerWorker
   sidekiq_options queue: 'notifiers', :retry => 10, :backtrace => true
 
   sidekiq_retries_exhausted do |msg|
-    Sidekiq.logger.warn "Worker Fallido. Enviar a otra zona."
+    processT = JSON.parse(msg['args'][0].to_s)
+    RestClient.post "http://localhost:3000/recover/notify", processT.to_json, :content_type => :json, :accept => :json
+    errorData = ErrorLog.new(worker: 'ErrorWorker',data: msg['args'].to_s)
+    errorData.save!
   end
 
   def perform(data)
